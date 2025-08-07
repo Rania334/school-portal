@@ -8,7 +8,7 @@ import {
   useMediaQuery,
   useTheme
 } from '@mui/material';
-import type { Announcement } from '../store/announcementSlice';
+import type { Announcement } from '../../store/announcementSlice';
 import { useTranslation } from 'react-i18next';
 
 interface Props {

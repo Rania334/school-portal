@@ -4,8 +4,8 @@ import {
   Button, CircularProgress, Stack, Box
 } from '@mui/material'
 import { useDispatch, useSelector } from 'react-redux'
-import { fetchTasks } from '../store/taskSlice'
-import type { RootState, AppDispatch } from '../store/store'
+import { fetchTasks } from '../../store/taskSlice'
+import type { RootState, AppDispatch } from '../../store/store'
 import DueCard from './DueCard'
 
 const LoadMoreModal: React.FC<{ open: boolean, onClose: () => void }> = ({ open, onClose }) => {

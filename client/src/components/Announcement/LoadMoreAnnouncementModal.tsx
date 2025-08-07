@@ -4,8 +4,8 @@ import {
     Button, CircularProgress, Box, Typography, Avatar, Stack
 } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchAnnouncements } from '../store/announcementSlice';
-import type { RootState, AppDispatch } from '../store/store';
+import { fetchAnnouncements } from '../../store/announcementSlice';
+import type { RootState, AppDispatch } from '../../store/store';
 
 const LoadMoreAnnouncementModal: React.FC<{ open: boolean; onClose: () => void }> = ({ open, onClose }) => {
     const dispatch = useDispatch<AppDispatch>();

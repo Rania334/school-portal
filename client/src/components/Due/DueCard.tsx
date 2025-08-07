@@ -10,7 +10,7 @@ import AssignmentIcon from '@mui/icons-material/Assignment'
 import QuizIcon from '@mui/icons-material/Quiz'
 import AccessTimeIcon from '@mui/icons-material/AccessTime'
 import { useSelector } from 'react-redux'
-import type { RootState } from '../store/store'
+import type { RootState } from '../../store/store'
 import { useTranslation } from 'react-i18next'
 
 interface DueCardProps {

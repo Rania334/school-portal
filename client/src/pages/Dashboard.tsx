@@ -5,60 +5,52 @@ import { Box, Drawer, useMediaQuery, useTheme } from '@mui/material'
 import { fetchAnnouncements } from '../store/announcementSlice'
 import { fetchTasks } from '../store/taskSlice'
 import type { RootState, AppDispatch } from '../store/store'
-import type { DueItem } from '../components/DueSection'
+import type { DueItem } from '../components/Due/DueSection'
 
 import Sidebar from '../components/Sidebar'
 import NavBar from '../components/NavBar'
 import HighlightCard from '../components/HighlightCard'
 import TeacherPostForm from '../components/TeacherPostForm'
-import AnnouncementTable from '../components/AnnouncementTable'
-import DueSection from '../components/DueSection'
-import LoadMoreModal from '../components/LoadMoreModel'
-import LoadMoreAnnouncementModal from '../components/LoadMoreAnnouncementModal'
+import AnnouncementTable from '../components/Announcement/AnnouncementTable'
+import DueSection from '../components/Due/DueSection'
+import LoadMoreModal from '../components/Due/LoadMoreModel'
+import LoadMoreAnnouncementModal from '../components/Announcement/LoadMoreAnnouncementModal'
 
 const Dashboard: React.FC = () => {
   const dispatch = useDispatch<AppDispatch>()
 
-  // UI state
   const [drawerOpen, setDrawerOpen] = useState(false)
   const [taskModalOpen, setTaskModalOpen] = useState(false)
   const [announcementModalOpen, setAnnouncementModalOpen] = useState(false)
 
-  // Auth state
   const userInfo = useSelector((state: RootState) => state.auth.user)
   const isTeacher = !!userInfo?.subject
 
-  // Announcement state
   const {
     announcements,
     loading: announcementsLoading,
     error: announcementsError,
   } = useSelector((state: RootState) => state.announcements)
 
-  // Task state
   const {
     tasks,
     loading: tasksLoading,
     error: tasksError,
   } = useSelector((state: RootState) => state.tasks)
 
-  // Responsive helpers
   const theme = useTheme()
   const isMdDown = useMediaQuery(theme.breakpoints.down('md'))
   const isLgDown = useMediaQuery(theme.breakpoints.down('lg'))
 
-  // Fetch announcements & tasks
   useEffect(() => {
     dispatch(fetchAnnouncements({ skip: 0, limit: 5 }))
     dispatch(fetchTasks({ skip: 0, limit: 5 }))
   }, [dispatch])
 
-  // Handlers
   const toggleDrawer = () => setDrawerOpen(prev => !prev)
   const handleAllTasksClick = () => setTaskModalOpen(true)
   const handleAllAnnouncementsClick = () => setAnnouncementModalOpen(true)
 
-  // Transform tasks into dueItems
   const dueItems: DueItem[] = tasks.map(task => ({
     type: task.type,
     course: task.course,
