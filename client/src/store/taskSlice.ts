@@ -14,7 +14,7 @@ interface TaskState {
     tasks: Task[]
     loading: boolean
     error: string | null
-    skip: number // 🔄 track skip for Load More
+    skip: number
     hasMore: boolean
 }
 

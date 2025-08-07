@@ -1,7 +1,5 @@
-// src/components/DueCard.tsx
 import React from 'react'
 import {
-
   Card,
   Typography,
   Button,
@@ -13,6 +11,7 @@ import QuizIcon from '@mui/icons-material/Quiz'
 import AccessTimeIcon from '@mui/icons-material/AccessTime'
 import { useSelector } from 'react-redux'
 import type { RootState } from '../store/store'
+import { useTranslation } from 'react-i18next'
 
 interface DueCardProps {
   type: 'quiz' | 'assignment'
@@ -29,6 +28,7 @@ const DueCard: React.FC<DueCardProps> = ({
   dueDate,
   onClick,
 }) => {
+  const { t } = useTranslation()
   const isQuiz = type === 'quiz'
   const userInfo = useSelector((state: RootState) => state.auth.user)
   const isTeacher = !!userInfo?.subject
@@ -42,42 +42,45 @@ const DueCard: React.FC<DueCardProps> = ({
         borderRadius: 2,
       }}
     >
-
-
       <Divider sx={{ my: 1 }} />
 
       <Stack spacing={1}>
         <Stack direction="row" alignItems="center" spacing={1}>
-          {isQuiz ? <QuizIcon sx={{ color: '#3A8694' }} fontSize="small" /> : <AssignmentIcon sx={{ color: '#3A8694' }} fontSize="small" />}
+          {isQuiz ? (
+            <QuizIcon sx={{ color: '#3A8694' }} fontSize="small" />
+          ) : (
+            <AssignmentIcon sx={{ color: '#3A8694' }} fontSize="small" />
+          )}
           <Typography fontWeight={500}>
-            {isQuiz ? 'Quiz' : 'Assignment'}
+            {isQuiz ? t('quiz') : t('assignment')}
           </Typography>
         </Stack>
 
         <Typography variant="body2">
-          <strong>Course:</strong> {course}
+          <strong>{t('course')}:</strong> {course}
         </Typography>
 
         <Typography variant="body2">
-          <strong>Topic:</strong> {topic}
+          <strong>{t('topic')}:</strong> {topic}
         </Typography>
 
         <Stack direction="row" alignItems="center" spacing={1}>
           <AccessTimeIcon fontSize="small" />
           <Typography variant="body2">
-            <strong>Due:</strong> {dueDate}
+            <strong>{t('due')}:</strong> {dueDate}
           </Typography>
         </Stack>
-        {!isTeacher &&
+
+        {!isTeacher && (
           <Button
             variant="outlined"
             fullWidth
-            sx={{ mt: 1, color: "#3A8694" }}
-
+            sx={{ mt: 1, color: '#3A8694' }}
             onClick={onClick}
           >
-            {isQuiz ? 'Start Quiz' : 'Solve Assignment'}
-          </Button>}
+            {isQuiz ? t('startQuiz') : t('solveAssignment')}
+          </Button>
+        )}
       </Stack>
     </Card>
   )

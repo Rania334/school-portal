@@ -9,6 +9,7 @@ import {
   useTheme
 } from '@mui/material';
 import type { Announcement } from '../store/announcementSlice';
+import { useTranslation } from 'react-i18next';
 
 interface Props {
   data: Announcement[];
@@ -18,19 +19,21 @@ interface Props {
 const AnnouncementTable: React.FC<Props> = ({ data, onAllClick }) => {
   const theme = useTheme();
   const isSmallScreen = useMediaQuery(theme.breakpoints.down('lg'));
+  const { t } = useTranslation(); // ✅
 
   return (
     <Box component={Paper} sx={{ p: isSmallScreen ? 2 : 4 }}>
       <Box display="flex" justifyContent="space-between" alignItems="center" mb={2}>
-        <Typography variant="h6">Recent Announcements</Typography>
+        <Typography variant="h6">{t('recentAnnouncements')}</Typography> {/* ✅ */}
         <Typography
           variant="body2"
           sx={{ color: '#1976d2', fontWeight: 500, cursor: 'pointer' }}
           onClick={onAllClick}
         >
-          All
+          {t('all')} {/* ✅ */}
         </Typography>
       </Box>
+
       {data.slice(0, 4).map((row) => (
         <Box
           key={row._id}
@@ -63,7 +66,6 @@ const AnnouncementTable: React.FC<Props> = ({ data, onAllClick }) => {
             </Box>
           </Box>
 
-          {/* Divider line */}
           {!isSmallScreen && (
             <Divider
               orientation="vertical"
@@ -72,9 +74,10 @@ const AnnouncementTable: React.FC<Props> = ({ data, onAllClick }) => {
             />
           )}
 
-          {/* Right: Content */}
           <Box flex={1} sx={{ wordWrap: 'break-word' }}>
-            <Typography variant="body2" color="text.secondary" >{row.content}</Typography>
+            <Typography variant="body2" color="text.secondary">
+              {row.content}
+            </Typography>
           </Box>
         </Box>
       ))}

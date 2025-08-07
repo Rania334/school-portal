@@ -1,10 +1,12 @@
 import React from 'react';
 import { Box, Typography, Paper, useTheme, useMediaQuery } from '@mui/material';
 import GradientButton from './smallerComp/GradientButton';
+import { useTranslation } from 'react-i18next';
 
 const HighlightCard: React.FC = () => {
     const theme = useTheme();
-    const isMdDown = useMediaQuery(theme.breakpoints.down('md')) // md and smaller
+    const isMdDown = useMediaQuery(theme.breakpoints.down('md'));
+    const { t } = useTranslation();
 
     return (
         <Paper
@@ -13,7 +15,6 @@ const HighlightCard: React.FC = () => {
                 border: .5,
                 borderRadius: 4,
                 borderColor: '#6b6b6b22',
-
                 mx: 3,
                 my: 4,
                 display: 'flex',
@@ -25,10 +26,10 @@ const HighlightCard: React.FC = () => {
         >
             <Box sx={{ p: 4, flex: 1 }}>
                 <Typography variant="h5" fontWeight="bold" gutterBottom>
-                    EXAMS TIME
+                    {t('examsTime')}
                 </Typography>
                 <Typography variant="body1" gutterBottom>
-                    Here we are, are you ready to fight? Don’t worry, we prepared some tips to help you get ready for your exams.
+                    {t('examIntro')}
                 </Typography>
                 <Typography
                     variant="body2"
@@ -38,10 +39,10 @@ const HighlightCard: React.FC = () => {
                         my: 1
                     }}
                 >
-                    "Nothing happens until something moves."
+                    {t('examQuote')}
                 </Typography>
                 <GradientButton onClick={() => console.log('Clicked!')}>
-                    View Exam Tips
+                    {t('viewExamTips')}
                 </GradientButton>
             </Box>
 
@@ -53,7 +54,6 @@ const HighlightCard: React.FC = () => {
                     height: isMdDown ? 180 : 220,
                     display: isMdDown ? 'none' : 'block',
                     width: 'auto',
-
                 }}
             />
         </Paper>

@@ -16,6 +16,7 @@ import NotificationsIcon from '@mui/icons-material/Notifications'
 import MailOutlineIcon from '@mui/icons-material/MailOutline'
 import SearchIcon from '@mui/icons-material/Search'
 import MenuIcon from '@mui/icons-material/Menu'
+import { useTranslation } from 'react-i18next'
 
 interface NavBarProps {
     onMenuClick?: () => void
@@ -23,12 +24,23 @@ interface NavBarProps {
     image?: string
 }
 
-const NavBar: React.FC<NavBarProps> = ({ onMenuClick, username = 'Talia',image = '/default-avatar.png'}) => {
+const NavBar: React.FC<NavBarProps> = ({
+    onMenuClick,
+    username = 'Talia',
+    image = '/default-avatar.png'
+}) => {
     const theme = useTheme()
     const isMdDown = useMediaQuery(theme.breakpoints.down('md'))
     const isSmDown = useMediaQuery(theme.breakpoints.down('sm'))
     const islgDown = useMediaQuery(theme.breakpoints.down('lg'))
 
+    const { t, i18n } = useTranslation()
+
+    const toggleLanguage = () => {
+        const newLang = i18n.language === 'en' ? 'ar' : 'en'
+        i18n.changeLanguage(newLang)
+        document.dir = newLang === 'ar' ? 'rtl' : 'ltr'
+    }
 
     return (
         <AppBar position="sticky" color="transparent" elevation={0}>
@@ -50,7 +62,7 @@ const NavBar: React.FC<NavBarProps> = ({ onMenuClick, username = 'Talia',image =
                     )}
                     {!isSmDown && (
                         <Typography variant="h6" fontWeight="bold" color="#000">
-                            Welcome, {username}
+                            {t('welcome')}, {username}
                         </Typography>
                     )}
                 </Box>
@@ -74,14 +86,13 @@ const NavBar: React.FC<NavBarProps> = ({ onMenuClick, username = 'Talia',image =
                         >
                             <SearchIcon sx={{ color: '#888' }} />
                             <InputBase
-                                placeholder="Search…"
+                                placeholder={t('search')}
                                 sx={{ ml: 1, flex: 1 }}
                                 inputProps={{ 'aria-label': 'search' }}
                             />
                         </Paper>
                     )}
 
-                    {/* Notification Icon: hidden on xs */}
                     {!isSmDown && (
                         <IconButton>
                             <Badge badgeContent={2} color="error">
@@ -97,6 +108,22 @@ const NavBar: React.FC<NavBarProps> = ({ onMenuClick, username = 'Talia',image =
                             </Badge>
                         </IconButton>
                     )}
+
+                    <Typography
+                        variant="body2"
+                        onClick={toggleLanguage}
+                        sx={{
+                            cursor: 'pointer',
+                            fontWeight: 500,
+                            px: 1,
+                            borderRadius: 1,
+                            backgroundColor: '#f0f0f0',
+                            color: '#333',
+                            '&:hover': { backgroundColor: '#e0e0e0' },
+                        }}
+                    >
+                        {i18n.language === 'en' ? 'العربية' : 'English'}
+                    </Typography>
 
                     <Avatar alt={username} src={image || '/default-avatar.png'} />
                 </Box>

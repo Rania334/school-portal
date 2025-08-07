@@ -7,6 +7,7 @@ import {
   Box,
 } from '@mui/material'
 import DueCard from './DueCard'
+import { useTranslation } from 'react-i18next' // 🔁 import hook
 
 export interface DueItem {
   type: 'quiz' | 'assignment'
@@ -18,10 +19,12 @@ export interface DueItem {
 
 interface DueSectionProps {
   items: DueItem[]
-  onAllClick: () => void // ✅ add prop
+  onAllClick: () => void
 }
 
 const DueSection: React.FC<DueSectionProps> = ({ items, onAllClick }) => {
+  const { t } = useTranslation() // 🔁 translation hook
+
   return (
     <Card
       elevation={3}
@@ -34,14 +37,14 @@ const DueSection: React.FC<DueSectionProps> = ({ items, onAllClick }) => {
     >
       <Stack direction="row" justifyContent="space-between" alignItems="center">
         <Typography variant="subtitle2" fontWeight={600}>
-          What's due
+          {t('whats_due')}
         </Typography>
         <Typography
           variant="body2"
           sx={{ color: '#1976d2', fontWeight: 500, cursor: 'pointer' }}
-          onClick={onAllClick} // ✅ open modal
+          onClick={onAllClick}
         >
-          All
+          {t('all')}
         </Typography>
       </Stack>
 

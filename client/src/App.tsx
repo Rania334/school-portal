@@ -1,10 +1,12 @@
 // src/App.tsx
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import type { RootState } from './store/store'
+
 import Home from './routes/Home'
 import Dashboard from './pages/Dashboard'
 import requireAuth from './components/requireAuth'
+
 import { Box } from '@mui/material'
 import './App.css'
 
@@ -14,21 +16,15 @@ function App() {
 
   return (
     <Router>
-      {loggedIn ? (
-        <Box sx={{ display: 'flex' }}>
-          <Box>
-            <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/dashboard" element={<ProtectedDashboard />} />
-            </Routes>
-          </Box>
-        </Box>
-      ) : (
+      <Box sx={{ display: 'flex' }}>
         <Routes>
-          <Route path="/" element={<Home />} />
+          <Route
+            path="/"
+            element={loggedIn ? <Navigate to="/dashboard" replace /> : <Home />}
+          />
           <Route path="/dashboard" element={<ProtectedDashboard />} />
         </Routes>
-      )}
+      </Box>
     </Router>
   )
 }
