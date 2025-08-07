@@ -1,7 +1,5 @@
-// models/User.js
 const mongoose = require("mongoose");
 
-// models/User.js
 const userSchema = new mongoose.Schema({
   username: { type: String, required: true },
   subject: { type: String},

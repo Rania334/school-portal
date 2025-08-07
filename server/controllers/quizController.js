@@ -7,7 +7,7 @@ const getTasks = async (req, res) => {
 
     const query = type ? { type } : {};
     const tasks = await Task.find(query)
-      .sort({ dueDate: 1 }) // optional: sort by dueDate
+      .sort({ dueDate: 1 })
       .skip(parseInt(skip))
       .limit(parseInt(limit));
 

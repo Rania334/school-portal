@@ -46,7 +46,7 @@ const LoadMoreModal: React.FC<{ open: boolean, onClose: () => void }> = ({ open,
         dividers
         ref={contentRef}
         onScroll={handleScroll}
-        sx={{ maxHeight: 400, overflowY: 'auto' }} // 🔁 makes it scrollable
+        sx={{ maxHeight: 400, overflowY: 'auto' }}
       >
         <Stack spacing={2}>
           {tasks.map((task, index) => (

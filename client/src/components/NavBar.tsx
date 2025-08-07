@@ -53,7 +53,6 @@ const NavBar: React.FC<NavBarProps> = ({
                     boxShadow: '0px 2px 8px rgba(0, 0, 0, 0.05)',
                 }}
             >
-                {/* Left: Welcome text & menu button */}
                 <Box display="flex" alignItems="center" gap={2}>
                     {islgDown && (
                         <IconButton onClick={onMenuClick}>
@@ -67,9 +66,7 @@ const NavBar: React.FC<NavBarProps> = ({
                     )}
                 </Box>
 
-                {/* Right: Icons & Search */}
                 <Box display="flex" alignItems="center" gap={2}>
-                    {/* Search box: hidden on small screens */}
                     {!isMdDown && (
                         <Paper
                             component="form"

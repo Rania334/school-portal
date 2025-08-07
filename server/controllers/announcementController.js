@@ -1,14 +1,12 @@
 const Announcement = require('../models/Announcement');
 
-// @desc    Get all announcements
-// @route   GET /api/announcements
 const getAnnouncements = async (req, res) => {
     try {
         const skip = parseInt(req.query.skip) || 0;
         const limit = parseInt(req.query.limit) || 5;
 
         const announcements = await Announcement.find()
-            .sort({ createdAt: -1 }) // newest first
+            .sort({ createdAt: -1 })
             .skip(skip)
             .limit(limit)
             .populate("user", "username image subject");
@@ -23,7 +21,7 @@ const createAnnouncement = async (req, res) => {
     try {
         const newAnnouncement = new Announcement({
             ...req.body,
-            user: req.user.id  // from authMiddleware
+            user: req.user.id
         });
         console.log("Decoded user:", req.user);
 
@@ -33,10 +31,6 @@ const createAnnouncement = async (req, res) => {
         res.status(400).json({ error: err.message });
     }
 };
-
-
-// @desc    Update an announcement
-// @route   PUT /api/announcements/:id
 const updateAnnouncement = async (req, res) => {
     try {
         const updated = await Announcement.findByIdAndUpdate(
@@ -51,8 +45,6 @@ const updateAnnouncement = async (req, res) => {
     }
 };
 
-// @desc    Delete an announcement
-// @route   DELETE /api/announcements/:id
 const deleteAnnouncement = async (req, res) => {
     try {
         const deleted = await Announcement.findByIdAndDelete(req.params.id);
@@ -63,7 +55,6 @@ const deleteAnnouncement = async (req, res) => {
     }
 };
 
-// Export all
 module.exports = {
     getAnnouncements,
     createAnnouncement,

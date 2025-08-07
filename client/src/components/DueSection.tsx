@@ -1,4 +1,3 @@
-// src/components/DueSection.tsx
 import React from 'react'
 import {
   Card,
@@ -7,7 +6,7 @@ import {
   Box,
 } from '@mui/material'
 import DueCard from './DueCard'
-import { useTranslation } from 'react-i18next' // 🔁 import hook
+import { useTranslation } from 'react-i18next'
 
 export interface DueItem {
   type: 'quiz' | 'assignment'
@@ -23,7 +22,7 @@ interface DueSectionProps {
 }
 
 const DueSection: React.FC<DueSectionProps> = ({ items, onAllClick }) => {
-  const { t } = useTranslation() // 🔁 translation hook
+  const { t } = useTranslation() 
 
   return (
     <Card

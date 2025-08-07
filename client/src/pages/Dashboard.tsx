@@ -121,7 +121,6 @@ const Dashboard: React.FC = () => {
             pb: 3,
           }}
         >
-          {/* Announcements Section */}
           <Box sx={{ flex: 1 }}>
             {announcementsLoading && <p>Loading announcements...</p>}
             {announcementsError && <p>Error: {announcementsError}</p>}
@@ -133,7 +132,6 @@ const Dashboard: React.FC = () => {
             )}
           </Box>
 
-          {/* Due Tasks Section */}
           <Box sx={{ width: isMdDown ? '100%' : 320, flexShrink: 0 }}>
             {tasksLoading && <p>Loading tasks...</p>}
             {tasksError && <p>Error: {tasksError}</p>}
@@ -143,7 +141,6 @@ const Dashboard: React.FC = () => {
           </Box>
         </Box>
 
-        {/* Modals */}
         <LoadMoreModal open={taskModalOpen} onClose={() => setTaskModalOpen(false)} />
         <LoadMoreAnnouncementModal
           open={announcementModalOpen}

@@ -19,7 +19,7 @@ interface Props {
 const AnnouncementTable: React.FC<Props> = ({ data, onAllClick }) => {
   const theme = useTheme();
   const isSmallScreen = useMediaQuery(theme.breakpoints.down('lg'));
-  const { t } = useTranslation(); // ✅
+  const { t } = useTranslation();
 
   return (
     <Box component={Paper} sx={{ p: isSmallScreen ? 2 : 4 }}>

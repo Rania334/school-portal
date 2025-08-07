@@ -1,9 +1,7 @@
-// controllers/authController.js
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
 const User = require("../models/User");
 
-const SECRET_KEY = "your_secret_key";
 
 const register = async (req, res) => {
   const { username, subject, image, email, password } = req.body;
@@ -32,7 +30,7 @@ const login = async (req, res) => {
     const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch) return res.status(400).json({ message: "Invalid credentials" });
 
-    const token = jwt.sign({ id: user._id }, SECRET_KEY, { expiresIn: "1h" });
+    const token = jwt.sign({ id: user._id }, process.env.SECRET_KEY, { expiresIn: "1h" });
     const { password: _, ...userWithoutPassword } = user.toObject();
 
     res.json({ token, user: userWithoutPassword });
