@@ -1,7 +1,7 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest'
 import reducer, { fetchTasks } from '../taskSlice'
 import type { TaskState } from '../taskSlice'
-import { AnyAction } from '@reduxjs/toolkit'
+import { Action } from '@reduxjs/toolkit'
 
 vi.mock('axios')
 
@@ -19,7 +19,7 @@ describe('taskSlice', () => {
   })
 
   it('should handle initial state', () => {
-    expect(reducer(undefined, {} as AnyAction)).toEqual(initialState)
+    expect(reducer(undefined, {} as Action)).toEqual(initialState)
   })
 
   it('should handle fetchTasks.pending', () => {

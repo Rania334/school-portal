@@ -79,7 +79,7 @@ const Sidebar: React.FC<{ onClose?: () => void }> = ({ onClose }) => {
                     borderRadius: 1,
                     backgroundColor: isActive ? '#6c899aff' : 'transparent',
                     '&:hover': {
-                      backgroundColor: '#03547c',
+                      backgroundColor: '#adb2b4ff',
                     },
                   }}
                 >
