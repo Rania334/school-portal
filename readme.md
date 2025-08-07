@@ -14,6 +14,10 @@ Built with:
 
 ---
 
+## Live Demo
+https://schoolportal-lrnf.onrender.com
+---
+
 ##  Features
 
 ###  Authentication
@@ -30,6 +34,9 @@ Built with:
 - List, Create, Edit, Delete quizzes (aka tasks).
 - Filtered by `type: 'quiz'`.
 - Sorted by `dueDate`.
+
+### Teacher Dashboard
+- Dedicated dashboard for teachers to **post, edit, and delete announcements and quizzes**.
 
 ###  Architecture
 - React reusable components.
@@ -61,9 +68,9 @@ Built with:
 
 ---
 
-### 🗃️ API Endpoints
+###  API Endpoints
 
-#### 🔐 Auth
+####  Auth
 
 | Method | Endpoint              | Description     |
 |--------|------------------------|-----------------|
@@ -90,8 +97,20 @@ Built with:
 
 ## Design
 ### The dashboard was created to follow the design provided in the video/spec sheet with full responsiveness.
+<img width="1920" height="856" alt="Screenshot (2590)" src="https://github.com/user-attachments/assets/7a0496c2-1060-4f6c-b69d-159620875766" />
+<img width="1920" height="859" alt="Screenshot (2591)" src="https://github.com/user-attachments/assets/65a1bce9-0f1e-4edf-b7f2-eb7546464808" />
+<img width="1920" height="849" alt="Screenshot (2592)" src="https://github.com/user-attachments/assets/80369a0e-61dc-4ad4-84c7-dd29226e09ec" />
+<img width="1920" height="854" alt="Screenshot (2593)" src="https://github.com/user-attachments/assets/f673489f-93cd-4926-9724-35cac9c60438" />
+<img width="1920" height="867" alt="Screenshot (2594)" src="https://github.com/user-attachments/assets/2dbed93f-39a1-4ac5-a89a-5df27f39a0f2" />
+
+### Teacher DashBoard
+<img width="1920" height="872" alt="Screenshot (2595)" src="https://github.com/user-attachments/assets/d142a4c9-be57-4367-b6c8-c42bd081cb16" />
+
+
 
 ### 1. Clone the repo
+
+
 
 ```bash
 git clone https://github.com/Rania334/school-portal.git
