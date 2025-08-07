@@ -9,7 +9,7 @@ interface User {
   subject?: string
 }
 
-interface AuthState {
+export interface AuthState {
   loggedIn: boolean
   token: string | null
   user: User | null
