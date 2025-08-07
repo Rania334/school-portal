@@ -18,23 +18,35 @@ interface AnnouncementState {
   announcements: Announcement[];
   loading: boolean;
   error: string | null;
+  skip: number;
+  hasMore: boolean;
 }
 
 const initialState: AnnouncementState = {
   announcements: [],
   loading: false,
   error: null,
+  skip: 0,
+  hasMore: true,
 };
 
-// Thunk to fetch data
 export const fetchAnnouncements = createAsyncThunk(
   'announcements/fetchAll',
-  async () => {
-    const res = await axios.get('http://localhost:5000/api/announcements');
-    return res.data;
+  async (
+    { skip = 0, limit = 5 }: { skip?: number; limit?: number },
+    thunkAPI
+  ) => {
+    try {
+      const res = await axios.get('http://localhost:5000/api/announcements', {
+        params: { skip, limit },
+      });
+      return { data: res.data, skip };
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    } catch (error) {
+      return thunkAPI.rejectWithValue('Failed to fetch announcements');
+    }
   }
 );
-
 const announcementSlice = createSlice({
   name: 'announcements',
   initialState,
@@ -46,12 +58,21 @@ const announcementSlice = createSlice({
         state.error = null;
       })
       .addCase(fetchAnnouncements.fulfilled, (state, action) => {
-        state.announcements = action.payload;
+        const { data, skip } = action.payload;
         state.loading = false;
+
+        if (skip === 0) {
+          state.announcements = data;
+        } else {
+          state.announcements = [...state.announcements, ...data];
+        }
+
+        state.skip = skip;
+        state.hasMore = data.length > 0;
       })
       .addCase(fetchAnnouncements.rejected, (state, action) => {
         state.loading = false;
-        state.error = action.error.message || 'Failed to load announcements';
+        state.error = action.payload as string;
       });
   },
 });

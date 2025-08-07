@@ -1,60 +1,65 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import { Box, Drawer, useMediaQuery, useTheme } from '@mui/material'
+
 import { fetchAnnouncements } from '../store/announcementSlice'
 import { fetchTasks } from '../store/taskSlice'
 import type { RootState, AppDispatch } from '../store/store'
+import type { DueItem } from '../components/DueSection'
 
-import AnnouncementTable from '../components/AnnouncementTable'
 import Sidebar from '../components/Sidebar'
 import NavBar from '../components/NavBar'
 import HighlightCard from '../components/HighlightCard'
+import TeacherPostForm from '../components/TeacherPostForm'
+import AnnouncementTable from '../components/AnnouncementTable'
 import DueSection from '../components/DueSection'
 import LoadMoreModal from '../components/LoadMoreModel'
-import TeacherPostForm from '../components/TeacherPostForm'
-
-
-
-import {
-  Box,
-
-  Drawer,
-
-  useMediaQuery,
-  useTheme
-} from '@mui/material'
-import type { DueItem } from '../components/DueSection'
+import LoadMoreAnnouncementModal from '../components/LoadMoreAnnouncementModal'
 
 const Dashboard: React.FC = () => {
   const dispatch = useDispatch<AppDispatch>()
-  const [modalOpen, setModalOpen] = useState(false)
 
-  const handleAllClick = () => {
-    setModalOpen(true)
-  }
+  // UI state
+  const [drawerOpen, setDrawerOpen] = useState(false)
+  const [taskModalOpen, setTaskModalOpen] = useState(false)
+  const [announcementModalOpen, setAnnouncementModalOpen] = useState(false)
+
+  // Auth state
   const userInfo = useSelector((state: RootState) => state.auth.user)
   const isTeacher = !!userInfo?.subject
 
-  const { announcements, loading: announcementsLoading, error: announcementsError } = useSelector(
-    (state: RootState) => state.announcements
-  )
+  // Announcement state
+  const {
+    announcements,
+    loading: announcementsLoading,
+    error: announcementsError,
+  } = useSelector((state: RootState) => state.announcements)
 
-  const { tasks, loading: tasksLoading, error: tasksError } = useSelector(
-    (state: RootState) => state.tasks
-  )
+  // Task state
+  const {
+    tasks,
+    loading: tasksLoading,
+    error: tasksError,
+  } = useSelector((state: RootState) => state.tasks)
 
+  // Responsive helpers
   const theme = useTheme()
   const isMdDown = useMediaQuery(theme.breakpoints.down('md'))
-  const islgDown = useMediaQuery(theme.breakpoints.down('lg'))
-  const [drawerOpen, setDrawerOpen] = useState(false)
+  const isLgDown = useMediaQuery(theme.breakpoints.down('lg'))
 
+  // Fetch announcements & tasks
   useEffect(() => {
-    dispatch(fetchAnnouncements())
-    dispatch(fetchTasks({ skip: 0, limit: 5 }));
+    dispatch(fetchAnnouncements({ skip: 0, limit: 5 }))
+    dispatch(fetchTasks({ skip: 0, limit: 5 }))
   }, [dispatch])
 
+  // Handlers
   const toggleDrawer = () => setDrawerOpen(prev => !prev)
+  const handleAllTasksClick = () => setTaskModalOpen(true)
+  const handleAllAnnouncementsClick = () => setAnnouncementModalOpen(true)
 
-  const dueItems: DueItem[] = tasks.map((task) => ({
+  // Transform tasks into dueItems
+  const dueItems: DueItem[] = tasks.map(task => ({
     type: task.type,
     course: task.course,
     topic: task.topic,
@@ -71,7 +76,7 @@ const Dashboard: React.FC = () => {
 
   return (
     <Box sx={{ display: 'flex', height: '100vh' }}>
-      {islgDown ? (
+      {isLgDown ? (
         <Drawer
           anchor="left"
           open={drawerOpen}
@@ -92,8 +97,14 @@ const Dashboard: React.FC = () => {
           overflow: 'auto',
         }}
       >
-        <NavBar   username={userInfo?.username} image={userInfo?.image} onMenuClick={toggleDrawer} />
+        <NavBar
+          username={userInfo?.username}
+          image={userInfo?.image}
+          onMenuClick={toggleDrawer}
+        />
+
         {!isTeacher && <HighlightCard />}
+
         {isTeacher && (
           <Box pt={3}>
             <TeacherPostForm />
@@ -110,27 +121,34 @@ const Dashboard: React.FC = () => {
             pb: 3,
           }}
         >
-
-
+          {/* Announcements Section */}
           <Box sx={{ flex: 1 }}>
-
             {announcementsLoading && <p>Loading announcements...</p>}
             {announcementsError && <p>Error: {announcementsError}</p>}
             {!announcementsLoading && !announcementsError && (
-              <AnnouncementTable data={announcements} />
+              <AnnouncementTable
+                data={announcements}
+                onAllClick={handleAllAnnouncementsClick}
+              />
             )}
-
           </Box>
 
+          {/* Due Tasks Section */}
           <Box sx={{ width: isMdDown ? '100%' : 320, flexShrink: 0 }}>
             {tasksLoading && <p>Loading tasks...</p>}
             {tasksError && <p>Error: {tasksError}</p>}
             {!tasksLoading && !tasksError && (
-              <DueSection items={dueItems} onAllClick={handleAllClick} />
+              <DueSection items={dueItems} onAllClick={handleAllTasksClick} />
             )}
-            <LoadMoreModal open={modalOpen} onClose={() => setModalOpen(false)} />
           </Box>
         </Box>
+
+        {/* Modals */}
+        <LoadMoreModal open={taskModalOpen} onClose={() => setTaskModalOpen(false)} />
+        <LoadMoreAnnouncementModal
+          open={announcementModalOpen}
+          onClose={() => setAnnouncementModalOpen(false)}
+        />
       </Box>
     </Box>
   )

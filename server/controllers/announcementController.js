@@ -4,7 +4,15 @@ const Announcement = require('../models/Announcement');
 // @route   GET /api/announcements
 const getAnnouncements = async (req, res) => {
     try {
-        const announcements = await Announcement.find().populate("user" , "username image subject");
+        const skip = parseInt(req.query.skip) || 0;
+        const limit = parseInt(req.query.limit) || 5;
+
+        const announcements = await Announcement.find()
+            .sort({ createdAt: -1 }) // newest first
+            .skip(skip)
+            .limit(limit)
+            .populate("user", "username image subject");
+
         res.status(200).json(announcements);
     } catch (err) {
         res.status(500).json({ error: err.message });
