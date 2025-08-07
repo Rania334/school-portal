@@ -20,7 +20,7 @@ const LoadMoreAnnouncementModal: React.FC<{ open: boolean; onClose: () => void }
       dispatch(fetchAnnouncements({ skip: 0, limit }));
       setSkip(limit);
     }
-  }, [open]);
+  }, [dispatch, open]);
 
   const handleScroll = () => {
     const container = contentRef.current;
