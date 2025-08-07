@@ -10,7 +10,7 @@ export interface Task {
 
 }
 
-interface TaskState {
+export interface TaskState {
     tasks: Task[]
     loading: boolean
     error: string | null
