@@ -37,7 +37,7 @@ export const fetchAnnouncements = createAsyncThunk(
     thunkAPI
   ) => {
     try {
-      const res = await axios.get('http://localhost:5000/api/announcements', {
+      const res = await axios.get('https://school-backend-e6bh.onrender.com/api/announcements', {
         params: { skip, limit },
       });
       return { data: res.data, skip };

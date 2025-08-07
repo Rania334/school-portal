@@ -24,8 +24,8 @@ const TeacherPostForm: React.FC = () => {
     try {
       const url =
         postType === 'announcement'
-          ? 'http://localhost:5000/api/announcements'
-          : 'http://localhost:5000/api/quizzes'
+          ? 'https://school-backend-e6bh.onrender.com/announcements'
+          : 'https://school-backend-e6bh.onrender.com/api/quizzes'
 
       const body =
         postType === 'announcement'

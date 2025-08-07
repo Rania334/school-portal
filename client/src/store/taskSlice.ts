@@ -25,8 +25,6 @@ const initialState: TaskState = {
     skip: 0,
     hasMore: true
 }
-
-// ✅ Updated thunk to accept pagination params
 export const fetchTasks = createAsyncThunk(
     'tasks/fetchAll',
     async (
@@ -34,7 +32,7 @@ export const fetchTasks = createAsyncThunk(
         thunkAPI
     ) => {
         try {
-            const response = await axios.get(`http://localhost:5000/api/quizzes`, {
+            const response = await axios.get(`https://school-backend-e6bh.onrender.com/api/quizzes`, {
                 params: { skip, limit },
             })
             return { data: response.data, skip }
@@ -69,8 +67,6 @@ const taskSlice = createSlice({
                 } else {
                     state.tasks = [...state.tasks, ...data]
                 }
-
-                // ✅ Check if more data is available
                 state.hasMore = data.length > 0
             })
             .addCase(fetchTasks.rejected, (state, action) => {
