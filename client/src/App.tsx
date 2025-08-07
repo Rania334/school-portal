@@ -5,7 +5,7 @@ import type { RootState } from './store/store'
 
 import Home from './routes/Home'
 import Dashboard from './pages/Dashboard'
-import requireAuth from './components/requireAuth'
+import requireAuth from './components/HOC/requireAuth'
 
 import { Box } from '@mui/material'
 import './App.css'
