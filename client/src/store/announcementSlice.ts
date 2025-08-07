@@ -1,4 +1,3 @@
-// src/redux/announcementSlice.ts
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 
@@ -14,7 +13,7 @@ export interface Announcement {
   };
 }
 
-interface AnnouncementState {
+export interface AnnouncementState {
   announcements: Announcement[];
   loading: boolean;
   error: string | null;
