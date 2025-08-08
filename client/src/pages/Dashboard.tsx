@@ -51,13 +51,11 @@ const Dashboard: React.FC = () => {
   const isMdDown = useMediaQuery(theme.breakpoints.down('md'))
   const isLgDown = useMediaQuery(theme.breakpoints.down('lg'))
 
-  // Initial fetch on mount
   useEffect(() => {
     dispatch(fetchAnnouncements({ skip: 0, limit: 5 }))
     dispatch(fetchTasks({ skip: 0, limit: 5 }))
   }, [dispatch])
 
-  // Functions to refetch after posting
   const fetchLatestAnnouncements = () => {
     dispatch(fetchAnnouncements({ skip: 0, limit: 5 }))
   }
