@@ -32,12 +32,13 @@ https://drive.google.com/file/d/1BwsghBEIyMmBtOlSB5abG6AxDavMW99b/view?usp=shari
 - List, Create, Edit, Delete announcements.
 - Pagination (5 at a time).
 - Each post shows: title, content, teacher’s name, subject, timestamp.
+- Skeleton loaders improve UX during fetch.
 
 ###  Quizzes
 - List, Create, Edit, Delete quizzes (aka tasks).
 - Filtered by `type: 'quiz'`.
 - Sorted by `dueDate`.
-
+- Skeleton loaders improve UX during fetch.
 ### Teacher Dashboard
 - Dedicated dashboard for teachers to **post, edit, and delete announcements and quizzes**.
 
