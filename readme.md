@@ -17,6 +17,9 @@ Built with:
 ## Live Demo
 https://schoolportal-lrnf.onrender.com
 ---
+## Video
+https://drive.google.com/file/d/1BwsghBEIyMmBtOlSB5abG6AxDavMW99b/view?usp=sharing
+---
 
 ##  Features
 
@@ -97,14 +100,38 @@ https://schoolportal-lrnf.onrender.com
 
 ## Design
 ### The dashboard was created to follow the design provided in the video/spec sheet with full responsiveness.
-<img width="1920" height="856" alt="Screenshot (2590)" src="https://github.com/user-attachments/assets/7a0496c2-1060-4f6c-b69d-159620875766" />
-<img width="1920" height="859" alt="Screenshot (2591)" src="https://github.com/user-attachments/assets/65a1bce9-0f1e-4edf-b7f2-eb7546464808" />
-<img width="1920" height="849" alt="Screenshot (2592)" src="https://github.com/user-attachments/assets/80369a0e-61dc-4ad4-84c7-dd29226e09ec" />
-<img width="1920" height="854" alt="Screenshot (2593)" src="https://github.com/user-attachments/assets/f673489f-93cd-4926-9724-35cac9c60438" />
-<img width="1920" height="867" alt="Screenshot (2594)" src="https://github.com/user-attachments/assets/2dbed93f-39a1-4ac5-a89a-5df27f39a0f2" />
 
-### Teacher DashBoard
-<img width="1920" height="872" alt="Screenshot (2595)" src="https://github.com/user-attachments/assets/d142a4c9-be57-4367-b6c8-c42bd081cb16" />
+
+<table>
+  <tr>
+    <td><img width="100%" alt="Screenshot (2606)" src="https://github.com/user-attachments/assets/bddef560-1a15-48f6-a041-8507d5c86309" /></td>
+    <td><img width="100%" alt="Screenshot (2605)" src="https://github.com/user-attachments/assets/f4697ac7-c2c5-484c-9557-13f9a928f450" /></td>
+  </tr>
+  <tr>
+    <td><img width="100%" alt="Screenshot (2604)" src="https://github.com/user-attachments/assets/10d781db-b026-44f8-8b6a-caab3c317a17" /></td>
+    <td><img width="100%" alt="Screenshot (2603)" src="https://github.com/user-attachments/assets/48d457af-6f10-41fd-a574-f0694a5d4d4b" /></td>
+  </tr>
+  <tr>
+    <td><img width="100%" alt="Screenshot (2602)" src="https://github.com/user-attachments/assets/4f4d57c0-45c1-4703-b7ea-a29db855237d" /></td>
+    <td><img width="100%" alt="Screenshot (2601)" src="https://github.com/user-attachments/assets/76b1f98d-de4a-4b96-bed4-a067de03b3c2" /></td>
+  </tr>
+</table>
+<table>
+  <tr>
+    <td><img width="100%" alt="iPhone-13 (3)" src="https://github.com/user-attachments/assets/90cd5c14-dad6-4186-930c-79a2c6d5f0e9" /></td>
+        <td><img width="100%" alt="iPhone-13 (1)" src="https://github.com/user-attachments/assets/f037d17a-ee73-4d2a-8aa2-57ffdfab2150" /></td>
+
+  </tr>
+  <tr>
+    <td><img width="100%" alt="iPhone-13" src="https://github.com/user-attachments/assets/3e293ab4-30ee-491d-be39-ffab3187c888" /></td>
+    <td><img width="100%" alt="iPhone-13 (2)" src="https://github.com/user-attachments/assets/f159af9d-beff-458c-9217-7db9cd7e5115" /></td>
+  </tr>
+  <tr>
+    <td><img width="100%" alt="iPhone-13 (4)" src="https://github.com/user-attachments/assets/fbfddcb7-771b-4bb5-9b72-f324beb44ca9" /></td>
+
+  </tr>
+</table>
+        <td><img width="100%" alt="iPad-PRO" src="https://github.com/user-attachments/assets/59a6415f-1bfc-42a4-b298-37a4ffb19ddb" /></td>
 
 
 
