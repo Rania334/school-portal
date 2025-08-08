@@ -11,10 +11,8 @@ let token;
 let taskId;
 
 beforeAll(async () => {
-    // Connect to in-memory test DB or test Mongo URI
-    await mongoose.connect(process.env.MONGO_URI);
+    // await mongoose.connect(process.env.MONGO_URI);
 
-    // Create mock user + generate token
     const user = await User.create({ username: 'testuser', password: 'testpass', email: 'test@example.com' });
     token = jwt.sign({ id: user._id, username: user.username }, SECRET_KEY);
 });

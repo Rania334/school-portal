@@ -7,7 +7,7 @@ Built with:
 - React + Redux (TypeScript)
 - Jest / React Testing Library
 - Material UI
-- i18n-ready (future translation support)
+- i18n
 - Express.js + MongoDB (Mongoose)
 - JWT Auth (Token-based login/logout)
 - Fully Functional CRUD API

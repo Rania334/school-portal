@@ -19,6 +19,7 @@ export interface DueItem {
 interface DueSectionProps {
   items: DueItem[]
   onAllClick: () => void
+  loading?: boolean
 }
 
 const DueSection: React.FC<DueSectionProps> = ({ items, onAllClick }) => {

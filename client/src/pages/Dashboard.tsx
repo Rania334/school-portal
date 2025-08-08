@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { Box, Drawer, useMediaQuery, useTheme } from '@mui/material'
+import { Box, Drawer, Skeleton, useMediaQuery, useTheme } from '@mui/material'
 
 import { fetchAnnouncements } from '../store/announcementSlice'
 import { fetchTasks } from '../store/taskSlice'
@@ -15,6 +15,8 @@ import AnnouncementTable from '../components/Announcement/AnnouncementTable'
 import DueSection from '../components/Due/DueSection'
 import LoadMoreModal from '../components/Due/LoadMoreModel'
 import LoadMoreAnnouncementModal from '../components/Announcement/LoadMoreAnnouncementModal'
+import { DueCardSkeleton } from '../components/Skeleton/DueSectionSkeleton'
+import AnnouncementTableSkeleton from '../components/Skeleton/AnnouncementSkeleton'
 
 const Dashboard: React.FC = () => {
   const dispatch = useDispatch<AppDispatch>()
@@ -37,15 +39,32 @@ const Dashboard: React.FC = () => {
     loading: tasksLoading,
     error: tasksError,
   } = useSelector((state: RootState) => state.tasks)
+  
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const timer = setTimeout(() => setLoading(false), 1000)
+    return () => clearTimeout(timer)
+  }, [])
 
   const theme = useTheme()
   const isMdDown = useMediaQuery(theme.breakpoints.down('md'))
   const isLgDown = useMediaQuery(theme.breakpoints.down('lg'))
 
+  // Initial fetch on mount
   useEffect(() => {
     dispatch(fetchAnnouncements({ skip: 0, limit: 5 }))
     dispatch(fetchTasks({ skip: 0, limit: 5 }))
   }, [dispatch])
+
+  // Functions to refetch after posting
+  const fetchLatestAnnouncements = () => {
+    dispatch(fetchAnnouncements({ skip: 0, limit: 5 }))
+  }
+
+  const fetchLatestTasks = () => {
+    dispatch(fetchTasks({ skip: 0, limit: 5 }))
+  }
 
   const toggleDrawer = () => setDrawerOpen(prev => !prev)
   const handleAllTasksClick = () => setTaskModalOpen(true)
@@ -94,14 +113,22 @@ const Dashboard: React.FC = () => {
           image={userInfo?.image}
           onMenuClick={toggleDrawer}
         />
-
-        {!isTeacher && <HighlightCard />}
-
         {isTeacher && (
           <Box pt={3}>
-            <TeacherPostForm />
+            {loading ? (
+              <Skeleton variant="rectangular" width="90vw" height={200} />
+            ) : (
+              <TeacherPostForm
+                onPostSuccess={(type) => {
+                  if (type === 'announcement') fetchLatestAnnouncements()
+                  else if (type === 'quiz') fetchLatestTasks()
+                }}
+              />
+            )}
           </Box>
         )}
+
+        {!isTeacher && <HighlightCard />}
 
         <Box
           sx={{
@@ -114,7 +141,7 @@ const Dashboard: React.FC = () => {
           }}
         >
           <Box sx={{ flex: 1 }}>
-            {announcementsLoading && <p>Loading announcements...</p>}
+            {announcementsLoading && <AnnouncementTableSkeleton />}
             {announcementsError && <p>Error: {announcementsError}</p>}
             {!announcementsLoading && !announcementsError && (
               <AnnouncementTable
@@ -125,10 +152,14 @@ const Dashboard: React.FC = () => {
           </Box>
 
           <Box sx={{ width: isMdDown ? '100%' : 320, flexShrink: 0 }}>
-            {tasksLoading && <p>Loading tasks...</p>}
+            {tasksLoading && <DueCardSkeleton />}
             {tasksError && <p>Error: {tasksError}</p>}
             {!tasksLoading && !tasksError && (
-              <DueSection items={dueItems} onAllClick={handleAllTasksClick} />
+              <DueSection
+                items={dueItems}
+                onAllClick={handleAllTasksClick}
+                loading={tasksLoading}
+              />
             )}
           </Box>
         </Box>

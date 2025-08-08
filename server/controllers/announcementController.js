@@ -55,9 +55,26 @@ const deleteAnnouncement = async (req, res) => {
     }
 };
 
+const getAnnouncementsByTeacher = async (req, res) => {
+  try {
+    const skip = parseInt(req.query.skip) || 0;
+    const limit = parseInt(req.query.limit) || 5;
+    const announcements = await Announcement.find({ user: req.user.id })
+      .sort({ createdAt: -1 })
+      .skip(skip)
+      .limit(limit)
+      .populate("user", "username image subject");
+
+    res.status(200).json(announcements);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+};
+
 module.exports = {
     getAnnouncements,
     createAnnouncement,
     updateAnnouncement,
-    deleteAnnouncement
+    deleteAnnouncement,
+    getAnnouncementsByTeacher
 };
